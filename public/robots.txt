@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.bgjq.top/sitemap.xml
+
+# Disallow admin and system paths
+Disallow: /admin/
+Disallow: /api/
+Disallow: /storage/
+Disallow: /config/
+Disallow: /app/
+
+# Crawl-delay
+Crawl-delay: 1
