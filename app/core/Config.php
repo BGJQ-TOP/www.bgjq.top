@@ -16,6 +16,9 @@ class Config {
     }
     
     private function loadConfig() {
+        // 加载 .env 环境变量到 PHP
+        $this->loadEnv(APP_PATH . '/.env');
+        
         $configFiles = [
             'app.php',
             'database.php',
@@ -73,5 +76,46 @@ class Config {
     
     public function all() {
         return $this->config;
+    }
+    
+    private function loadEnv($path) {
+        if (!file_exists($path)) {
+            return;
+        }
+        
+        $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        if ($lines === false) {
+            return;
+        }
+        
+        foreach ($lines as $line) {
+            $line = trim($line);
+            
+            // 跳过注释和空行
+            if ($line === '' || strpos($line, '#') === 0) {
+                continue;
+            }
+            
+            // 解析 KEY=VALUE
+            if (strpos($line, '=') === false) {
+                continue;
+            }
+            
+            list($key, $value) = explode('=', $line, 2);
+            $key = trim($key);
+            $value = trim($value);
+            
+            // 移除可能的引号
+            if ((strpos($value, '"') === 0 && strrpos($value, '"') === strlen($value) - 1) ||
+                (strpos($value, "'") === 0 && strrpos($value, "'") === strlen($value) - 1)) {
+                $value = substr($value, 1, -1);
+            }
+            
+            if ($key !== '' && !array_key_exists($key, $_ENV) && !array_key_exists($key, $_SERVER)) {
+                putenv("{$key}={$value}");
+                $_ENV[$key] = $value;
+                $_SERVER[$key] = $value;
+            }
+        }
     }
 }
