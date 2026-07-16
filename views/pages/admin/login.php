@@ -8,9 +8,6 @@ seo()->setTitle(is_chinese() ? '管理员登录 · 邦国崛起' : 'Admin Login 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo seo()->getTitle(); ?></title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/public/css/style.css">
     <style>
         /* NES 风格登录页样式 - 与网站主样式保持一致 */

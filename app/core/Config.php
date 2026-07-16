@@ -79,9 +79,7 @@ class Config {
     }
     
     private function loadEnv($path) {
-        error_log("[DEBUG] loadEnv called with: " . $path);
         if (!file_exists($path)) {
-            error_log("[DEBUG] .env not found, skip loading");
             return;
         }
         
@@ -114,12 +112,10 @@ class Config {
             }
             
             if ($key !== '') {
-                error_log("[DEBUG] Setting env: {$key}=" . (strpos($key, 'PASSWORD') !== false || strpos($key, 'SECRET') !== false ? '***' : $value));
                 putenv("{$key}={$value}");
                 $_ENV[$key] = $value;
                 $_SERVER[$key] = $value;
             }
         }
-        error_log("[DEBUG] DB_PASSWORD getenv after loadEnv: " . (getenv('DB_PASSWORD') !== false ? 'SET' : 'NOT SET'));
     }
 }

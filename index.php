@@ -19,16 +19,6 @@ if (!is_dir($logPath)) {
 }
 ini_set('error_log', $logPath . '/php_error.log');
 
-// 临时调试：记录 .env 加载状态
-$envPath = APP_PATH . '/.env';
-error_log("[DEBUG] .env path: " . $envPath);
-error_log("[DEBUG] .env exists: " . (file_exists($envPath) ? 'YES' : 'NO'));
-if (file_exists($envPath)) {
-    error_log("[DEBUG] .env readable: " . (is_readable($envPath) ? 'YES' : 'NO'));
-    error_log("[DEBUG] .env size: " . filesize($envPath));
-}
-error_log("[DEBUG] DB_PASSWORD getenv before: '" . (getenv('DB_PASSWORD') !== false ? 'SET' : 'NOT SET') . "'");
-
 register_shutdown_function(function() {
     $error = error_get_last();
     if ($error && in_array($error['type'], [E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR, E_PARSE])) {

@@ -133,6 +133,7 @@ class SeoService {
         
         // 移动设备标签
         $output .= '<meta name="apple-mobile-web-app-capable" content="yes">' . "\n";
+        $output .= '<meta name="mobile-web-app-capable" content="yes">' . "\n";
         $output .= '<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">' . "\n";
         
         // Robots标签

@@ -43,8 +43,6 @@ class Database {
         $username = $config['username'] ?? 'root';
         $password = $config['password'] ?? '';
         
-        error_log("[DEBUG] Database connecting with user: " . $username . ", password set: " . ($password !== '' ? 'YES' : 'NO'));
-        
         try {
             $dsn = sprintf(
                 "mysql:host=%s;port=%s;dbname=%s;charset=%s",
